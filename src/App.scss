@@ -1,1 +1,63 @@
+// BootStrap
+
+// Google Fonts
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+
+$primary: deepskyblue;
+
+body {
+  background-color: #1d1d1d;
+  color: rgb(177, 177, 177);
+}
+h6,
+.h6,
+h5,
+.h5,
+h4,
+.h4,
+h3,
+.h3,
+h2,
+.h2,
+h1,
+.h1 {
+  font-family: Raleway, sans-serif;
+}
+
+.SideBar {
+  height: 100vh;
+  width: 400px;
+  background: rgb(54, 54, 54);
+  padding: 20px;
+}
+
+section {
+  min-height: 100vh;
+}
+
+.SideBar .logo svg {
+  width: 100px;
+}
+
+.SideBar .Logo {
+}
+
 @import "~bootstrap/scss/bootstrap.scss";
+
+:root {
+  --bs-body-bg: #292929;
+  --bs-body-color: #fff;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, $primary, #0080ae);
+}
+.btn-primary:hover {
+  color: white;
+  background: linear-gradient(45deg, #0080ae, deepskyblue);
+}
+
+.btn {
+  font-family: "Raleway", sans-serif;
+  color: rgb(206, 206, 206);
+}
