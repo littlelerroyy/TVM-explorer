@@ -4,12 +4,19 @@ const MainSelectionMenu = () => {
       <div className="mx-auto my-auto">
         <h2 className="fs-1">Which would you like to discover?</h2>
         <div className="d-grid gap-2">
-          <button className="btn btn-primary fs-1 fw-bold mt-3" type="button">
+          <a
+            href="./movies"
+            className="btn btn-primary fs-1 fw-bold mt-3"
+            type="button">
             Movies
-          </button>
-          <button className="btn btn-primary fs-1 fw-bold mt-3" type="button">
+          </a>
+
+          <a
+            href="./tv"
+            className="btn btn-primary fs-1 fw-bold mt-3"
+            type="button">
             TV Shows
-          </button>
+          </a>
         </div>
       </div>
     </section>
