@@ -6,15 +6,11 @@ import TV from "./Pages/TV";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <div className="container-xl">
-          <Routes>
-            <Route path="/" element={<MainSelectionMenu />} />
-            <Route path="/movies" element={<Movies />} />
-            <Route path="/tv" element={<TV />} />
-          </Routes>
-        </div>
-      </header>
+      <Routes>
+        <Route path="/" element={<MainSelectionMenu />} />
+        <Route path="/movies" element={<Movies />} />
+        <Route path="/tv" element={<TV />} />
+      </Routes>
     </div>
   );
 }

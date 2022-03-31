@@ -4,6 +4,7 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway);
 
 $primary: deepskyblue;
+$primary: #00faff;
 
 body {
   background-color: #1d1d1d;
@@ -22,16 +23,26 @@ h2,
 h1,
 .h1 {
   font-family: Raleway, sans-serif;
+  margin-bottom: 1rem !important;
+  color: $primary;
 }
 
-.SideBar {
-  height: 100vh;
-  width: 400px;
-  background: rgb(54, 54, 54);
-  padding: 20px;
+header#TopBar {
+  background: #181818;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+}
+header#TopBar ~ .spacer {
+  height: 100px;
 }
 
-section {
+header#TopBar h1 {
+  text-shadow: $primary 0px 0px 10px;
+  font-weight: bold;
+}
+
+section#MainSelection {
   min-height: 100vh;
 }
 
@@ -60,4 +71,12 @@ section {
 .btn {
   font-family: "Raleway", sans-serif;
   color: rgb(206, 206, 206);
+}
+
+.card {
+  background-color: #424242;
+}
+
+.movie-card {
+  width: 12rem;
 }
