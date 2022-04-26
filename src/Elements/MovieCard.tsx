@@ -6,7 +6,7 @@ const MovieCard = (MovieData: IMovie) => {
     <div className="col">
       <div className="card movie-card shadow rounded-3 mx-auto my-3 ">
         <img
-          src={`https://www.themoviedb.org/t/p/w220_and_h330_face/${MovieData.BackdropPath}`}
+          src={`https://image.tmdb.org/t/p/w342/${MovieData.BackdropPath}`}
           className="card-img-top "
           alt="..."
         />
