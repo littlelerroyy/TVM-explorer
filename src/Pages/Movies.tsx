@@ -4,11 +4,31 @@ import MovieCard from "../Elements/MovieCard";
 import SearchBar from "../Elements/SearchBar";
 import Movie from "../Models/MovieModel";
 import { useEffect, useState } from "react";
+import MovieModal from "../Elements/MovieModal";
 
 const Movies = () => {
   //Set the movie list states
   let [PopularMovieList, SetPopularMovieList] = useState<Movie[]>([]);
   let [UpcomingMovieList, SetUpcomingMoveList] = useState<Movie[]>([]);
+
+  let PlaceHolderMovie = new Movie(
+    0,
+    "Loading Movie",
+    "Loading Movie",
+    "Loading",
+    "null.jpg",
+    "1970-01-01",
+    [],
+    "Loading",
+    "null.jpg",
+    0,
+    0,
+    0,
+    false,
+    false
+  );
+
+  let [MovieModalState, SetMovieModalState] = useState<Movie>(PlaceHolderMovie);
 
   useEffect(() => {
     Movie.GetPopular().then((MovieData) =>
@@ -27,17 +47,27 @@ const Movies = () => {
         <h2>Movies</h2>
         <SearchBar />
 
+        <MovieModal {...MovieModalState} />
+
         <h3>Upcoming Movies</h3>
         <div className="row gx-3">
           {UpcomingMovieList.map((Movie) => (
-            <MovieCard key={Movie.ID} {...Movie} />
+            <MovieCard
+              MovieData={Movie}
+              SetModalState={SetMovieModalState}
+              key={Movie.ID}
+            />
           ))}
         </div>
 
         <h3>Popular Movies</h3>
         <div className="row gx-3">
           {PopularMovieList.map((Movie) => (
-            <MovieCard key={Movie.ID} {...Movie} />
+            <MovieCard
+              key={Movie.ID}
+              MovieData={Movie}
+              SetModalState={SetMovieModalState}
+            />
           ))}
         </div>
       </div>

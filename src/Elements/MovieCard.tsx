@@ -1,7 +1,10 @@
-import { FC } from "react";
-import IMovie from "../Interface/IMovie";
 import Movie from "../Models/MovieModel";
-const MovieCard = (MovieData: IMovie) => {
+import IMovie from "../Interface/IMovie";
+const MovieCard = (props: any) => {
+  const MovieData = props.MovieData as Movie;
+  const SetMovieModalState = props.SetModalState as React.Dispatch<
+    React.SetStateAction<Movie>
+  >;
   return (
     <div className="col">
       <div className="card movie-card shadow rounded-3 mx-auto my-3 ">
@@ -13,9 +16,16 @@ const MovieCard = (MovieData: IMovie) => {
         <div className="card-body">
           <h5 className="card-title">{MovieData.Title}</h5>
           <p className="card-text">{MovieData.ReleaseDate.getFullYear()}</p>
-          <a href="#" className="btn btn-primary">
+          <button
+            type="button"
+            className="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#MovieModal"
+            onClick={() => {
+              SetMovieModalState(MovieData);
+            }}>
             Discover
-          </a>
+          </button>
         </div>
       </div>
     </div>
