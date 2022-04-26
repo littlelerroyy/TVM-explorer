@@ -47,6 +47,25 @@ class Movie implements IMovie {
     this.Video = Video;
   }
 
+  public static MakeMovie(JSONData: any) {
+    return new Movie(
+      JSONData.id,
+      JSONData.title,
+      JSONData.original_title,
+      JSONData.overview,
+      JSONData.poster_path,
+      JSONData.release_date,
+      JSONData.genre_ids,
+      JSONData.original_language,
+      JSONData.backdrop_path,
+      JSONData.popularity,
+      JSONData.vote_count,
+      JSONData.vote_average,
+      JSONData.adult,
+      JSONData.video
+    );
+  }
+
   public static async GetPopular() {
     let response = await fetch(
       `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API_KEY}`
@@ -55,24 +74,7 @@ class Movie implements IMovie {
     let MovieArray: Movie[] = [];
 
     Data.results.forEach((x: any) => {
-      MovieArray.push(
-        new Movie(
-          x.id,
-          x.title,
-          x.original_title,
-          x.overview,
-          x.poster_path,
-          x.release_date,
-          x.genre_ids,
-          x.original_language,
-          x.backdrop_path,
-          x.popularity,
-          x.vote_count,
-          x.vote_average,
-          x.adult,
-          x.video
-        )
-      );
+      MovieArray.push(this.MakeMovie(x));
     });
 
     return MovieArray;
@@ -86,24 +88,21 @@ class Movie implements IMovie {
     let MovieArray: Movie[] = [];
 
     Data.results.forEach((x: any) => {
-      MovieArray.push(
-        new Movie(
-          x.id,
-          x.title,
-          x.original_title,
-          x.overview,
-          x.poster_path,
-          x.release_date,
-          x.genre_ids,
-          x.original_language,
-          x.backdrop_path,
-          x.popularity,
-          x.vote_count,
-          x.vote_average,
-          x.adult,
-          x.video
-        )
-      );
+      MovieArray.push(this.MakeMovie(x));
+    });
+
+    return MovieArray;
+  }
+
+  public static async SearchMovie(queryString: string) {
+    let response = await fetch(
+      `https://api.themoviedb.org/3/search/movie?query=${queryString}&api_key=${process.env.REACT_APP_API_KEY}`
+    );
+    let Data = await response.json();
+    let MovieArray: Movie[] = [];
+
+    Data.results.forEach((x: any) => {
+      MovieArray.push(this.MakeMovie(x));
     });
 
     return MovieArray;
