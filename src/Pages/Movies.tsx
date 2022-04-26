@@ -6,11 +6,17 @@ import Movie from "../Models/MovieModel";
 import { useEffect, useState } from "react";
 
 const Movies = () => {
-  let [MovieList, SetMovieList] = useState<Movie[]>([]);
+  //Set the movie list states
+  let [PopularMovieList, SetPopularMovieList] = useState<Movie[]>([]);
+  let [UpcomingMovieList, SetUpcomingMoveList] = useState<Movie[]>([]);
 
   useEffect(() => {
-    Movie.GetMovie().then((MovieData) =>
-      SetMovieList((prevState) => prevState.concat(MovieData))
+    Movie.GetPopular().then((MovieData) =>
+      SetPopularMovieList((prevState) => prevState.concat(MovieData))
+    );
+
+    Movie.GetUpcoming().then((MovieData) =>
+      SetUpcomingMoveList((prevState) => prevState.concat(MovieData))
     );
   }, []);
 
@@ -20,16 +26,20 @@ const Movies = () => {
       <div className="container-lg">
         <h2>Movies</h2>
         <SearchBar />
-        <h3>New in Box Office</h3>
-        <div className="row gx-5">
-          {MovieList.map((Movie) => (
-            <MovieCard {...Movie} />
+
+        <h3>Upcoming Movies</h3>
+        <div className="row gx-3">
+          {UpcomingMovieList.map((Movie) => (
+            <MovieCard key={Movie.ID} {...Movie} />
           ))}
-          ;
         </div>
 
-        <h3>Top Rated Movies</h3>
-        <div className="row gx-5"></div>
+        <h3>Popular Movies</h3>
+        <div className="row gx-3">
+          {PopularMovieList.map((Movie) => (
+            <MovieCard key={Movie.ID} {...Movie} />
+          ))}
+        </div>
       </div>
     </>
   );

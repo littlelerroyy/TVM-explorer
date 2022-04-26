@@ -1,4 +1,5 @@
-class Movie {
+import IMovie from "../Interface/IMovie";
+class Movie implements IMovie {
   ID: number;
   Title: string;
   OriginalTitle: string;
@@ -46,9 +47,40 @@ class Movie {
     this.Video = Video;
   }
 
-  public static async GetMovie() {
+  public static async GetPopular() {
     let response = await fetch(
       `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API_KEY}`
+    );
+    let Data = await response.json();
+    let MovieArray: Movie[] = [];
+
+    Data.results.forEach((x: any) => {
+      MovieArray.push(
+        new Movie(
+          x.id,
+          x.title,
+          x.original_title,
+          x.overview,
+          x.poster_path,
+          x.release_date,
+          x.genre_ids,
+          x.original_language,
+          x.backdrop_path,
+          x.popularity,
+          x.vote_count,
+          x.vote_average,
+          x.adult,
+          x.video
+        )
+      );
+    });
+
+    return MovieArray;
+  }
+
+  public static async GetUpcoming() {
+    let response = await fetch(
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_API_KEY}`
     );
     let Data = await response.json();
     let MovieArray: Movie[] = [];
