@@ -1,7 +1,9 @@
 import Movie from "../Models/MovieModel";
 import IMovie from "../Interface/IMovie";
+import PlaceHolderImage from "../Imgs/MoviePlaceholders/poster_w342.jpg";
 const MovieCard = (props: any) => {
   const MovieData = props.MovieData as Movie;
+
   const SetMovieModalState = props.SetModalState as React.Dispatch<
     React.SetStateAction<Movie>
   >;
@@ -9,7 +11,11 @@ const MovieCard = (props: any) => {
     <div className="col-sm-4">
       <div className="card movie-card shadow rounded-3 mx-auto my-3 ">
         <img
-          src={`https://image.tmdb.org/t/p/w342${MovieData.BackdropPath}`}
+          src={
+            MovieData.BackdropPath != null
+              ? `https://image.tmdb.org/t/p/w342${MovieData.BackdropPath}`
+              : PlaceHolderImage
+          }
           className="card-img-top "
           alt="..."
         />

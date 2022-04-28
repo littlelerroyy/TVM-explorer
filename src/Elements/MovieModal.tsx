@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Movie from "../Models/MovieModel";
 import LoadingSpinner from "./LoadingSpinner";
+import PlaceHolderImage from "../Imgs/MoviePlaceholders/poster_w780.jpg";
 
 const MovieModal = (MovieData: Movie) => {
   const [MovieIsLoaded, SetMovieIsLoaded] = useState(true);
@@ -34,7 +35,11 @@ const MovieModal = (MovieData: Movie) => {
                     <img
                       className="img-fluid mx-auto"
                       onLoad={() => SetMovieIsLoaded(false)}
-                      src={`https://image.tmdb.org/t/p/w780${MovieData.BackdropPath}`}
+                      src={
+                        MovieData.BackdropPath != null
+                          ? `https://image.tmdb.org/t/p/w780${MovieData.BackdropPath}`
+                          : PlaceHolderImage
+                      }
                     />
                     <p>{MovieData.ReleaseDate.getFullYear()}</p>
                     <p>{MovieData.Overview}</p>
