@@ -1,15 +1,27 @@
-// BootStrap
-
+//bootstrap
+@import "~bootstrap/scss/bootstrap.scss";
 // Google Fonts
 @import url(http://fonts.googleapis.com/css?family=Raleway);
 
-$primary: deepskyblue;
 $primary: #00faff;
+$bgColor: #1d1d1d;
+$txtColor: rgb(177, 177, 177);
 
 body {
-  background-color: #1d1d1d;
-  color: rgb(177, 177, 177);
+  background-color: $bgColor;
+  color: $txtColor;
 }
+.modal-header,
+.modal-footer {
+  border: none;
+}
+.modal-content {
+  background-color: $bgColor;
+}
+.modal-content h5 {
+  font-size: 2rem;
+}
+
 h6,
 .h6,
 h5,
@@ -50,8 +62,6 @@ section#MainSelection {
   width: 100px;
 }
 
-@import "~bootstrap/scss/bootstrap.scss";
-
 :root {
   --bs-body-bg: #292929;
   --bs-body-color: #fff;
@@ -63,6 +73,9 @@ section#MainSelection {
 .btn-primary:hover {
   color: white;
   background: linear-gradient(45deg, #0080ae, deepskyblue);
+}
+.btn-close {
+  filter: invert(1);
 }
 
 .btn {

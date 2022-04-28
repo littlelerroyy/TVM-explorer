@@ -12,7 +12,6 @@ const MovieModal = (MovieData: Movie) => {
         <div className="modal-dialog modal-dialog-centered modal-xl">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalToggleLabel"></h5>
               <button
                 type="button"
                 className="btn-close"
@@ -23,7 +22,9 @@ const MovieModal = (MovieData: Movie) => {
               <div className="container">
                 <div className="row justify-content-center">
                   <div className="col-lg-8">
-                    <h4>{MovieData.Title}</h4>
+                    <h5>
+                      {MovieData.Title} ({MovieData.ReleaseDate.getFullYear()})
+                    </h5>
                     <img
                       className="img-fluid mx-auto"
                       src={`https://image.tmdb.org/t/p/w780/${MovieData.BackdropPath}`}
