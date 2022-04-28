@@ -6,6 +6,9 @@ import SearchBar from "../Elements/SearchBar";
 import ISearchQueryState from "../Interface/ISearchQueryState";
 import Movie from "../Models/MovieModel";
 import TopBar from "../Sections/TopBar";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Footer from "../Sections/Footer";
 
 const MovieSearch = () => {
   //Delcare PageNumber
@@ -68,10 +71,13 @@ const MovieSearch = () => {
     <>
       <TopBar />
       <div className="container-lg">
-        <h2>Search Any Moovee</h2>
+        <h2>
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+          Search Any Moovee
+        </h2>
         <SearchBar SearchHandler={HandleSearch} />
         <MovieModal {...MovieModalState} />
-        <h3>Popular Movies</h3>
+
         <div className="row gx-3">
           {SearchResults.map((Movie) => (
             <MovieCard
@@ -95,6 +101,7 @@ const MovieSearch = () => {
           )}
         </div>
       </div>
+      <Footer />
     </>
   );
 };

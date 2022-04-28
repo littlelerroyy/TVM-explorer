@@ -1,10 +1,16 @@
-import { moveEmitHelpers } from "typescript";
 import TopBar from "../Sections/TopBar";
 import MovieCard from "../Elements/MovieCard";
 import Movie from "../Models/MovieModel";
 import { useEffect, useState } from "react";
 import MovieModal from "../Elements/MovieModal";
 import LoadingSpinner from "../Elements/LoadingSpinner";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faClapperboard,
+  faCalendarDay,
+  faFire,
+} from "@fortawesome/free-solid-svg-icons";
+import Footer from "../Sections/Footer";
 
 const Movies = () => {
   //Set the movie list states
@@ -49,10 +55,17 @@ const Movies = () => {
   return (
     <>
       <TopBar />
+
       <div className="container-lg">
-        <h2>Movies</h2>
+        <h2>
+          <FontAwesomeIcon icon={faClapperboard} />
+          Movies
+        </h2>
         <MovieModal {...MovieModalState} />
-        <h3>Upcoming Movies</h3>
+        <h3>
+          <FontAwesomeIcon icon={faCalendarDay} />
+          Upcoming Movies
+        </h3>
         <div className="row gx-3">
           {UpcomingMovieList.map((Movie) => (
             <MovieCard
@@ -64,7 +77,10 @@ const Movies = () => {
           <LoadingSpinner IsLoading={PopMovieLoadingState} />
         </div>
 
-        <h3>Popular Movies</h3>
+        <h3>
+          <FontAwesomeIcon icon={faFire} />
+          Popular Movies
+        </h3>
         <div className="row gx-3">
           {PopularMovieList.map((Movie) => (
             <MovieCard
@@ -76,6 +92,7 @@ const Movies = () => {
           <LoadingSpinner IsLoading={UpcomingMovieLoadingState} />
         </div>
       </div>
+      <Footer />
     </>
   );
 };
