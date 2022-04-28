@@ -50,9 +50,8 @@ h1 svg {
 
 header#TopBar {
   background: $HeaderFooterColor;
-  position: fixed;
-  z-index: 1;
   width: 100%;
+  border-bottom: $primary solid 2px;
 }
 
 header#TopBar ~ .spacer {
@@ -110,4 +109,10 @@ section#MainSelection {
 
 .movie-card {
   width: 342px;
+}
+.BlurWrapper {
+  transition: filter 0.5s;
+}
+.Apply-Blur {
+  filter: blur(5px);
 }

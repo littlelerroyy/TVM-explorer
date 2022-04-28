@@ -20,6 +20,7 @@ const MovieModal = (MovieData: Movie) => {
               <button
                 type="button"
                 className="btn-close"
+                onClick={RemoveBlurToModalBg}
                 data-bs-dismiss="modal"
                 aria-label="Close"></button>
             </div>
@@ -57,6 +58,7 @@ const MovieModal = (MovieData: Movie) => {
               <button
                 className="btn btn-primary"
                 data-bs-target="#exampleModalToggle2"
+                onClick={RemoveBlurToModalBg}
                 data-bs-toggle="modal">
                 Open second modal
               </button>
@@ -66,6 +68,16 @@ const MovieModal = (MovieData: Movie) => {
       </div>
     </>
   );
+};
+
+export const ApplyBlurToModalBg = () => {
+  const MovieModal = document.getElementById("BlurWrapper");
+  MovieModal?.classList.add("Apply-Blur");
+};
+
+export const RemoveBlurToModalBg = () => {
+  const MovieModal = document.getElementById("BlurWrapper");
+  MovieModal?.classList.remove("Apply-Blur");
 };
 
 export default MovieModal;

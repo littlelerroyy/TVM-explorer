@@ -54,45 +54,47 @@ const Movies = () => {
 
   return (
     <>
-      <TopBar />
+      <MovieModal {...MovieModalState} />
+      <div id="BlurWrapper">
+        <TopBar />
+        <div className="container-lg">
+          <h2>
+            <FontAwesomeIcon icon={faClapperboard} />
+            Movies
+          </h2>
 
-      <div className="container-lg">
-        <h2>
-          <FontAwesomeIcon icon={faClapperboard} />
-          Movies
-        </h2>
-        <MovieModal {...MovieModalState} />
-        <h3>
-          <FontAwesomeIcon icon={faCalendarDay} />
-          Upcoming Movies
-        </h3>
-        <div className="row gx-3">
-          {UpcomingMovieList.map((Movie) => (
-            <MovieCard
-              MovieData={Movie}
-              SetMovieModalState={SetMovieModalState}
-              key={Movie.ID}
-            />
-          ))}
-          <LoadingSpinner IsLoading={PopMovieLoadingState} />
-        </div>
+          <h3>
+            <FontAwesomeIcon icon={faCalendarDay} />
+            Upcoming Movies
+          </h3>
+          <div className="row gx-3">
+            {UpcomingMovieList.map((Movie) => (
+              <MovieCard
+                MovieData={Movie}
+                SetMovieModalState={SetMovieModalState}
+                key={Movie.ID}
+              />
+            ))}
+            <LoadingSpinner IsLoading={PopMovieLoadingState} />
+          </div>
 
-        <h3>
-          <FontAwesomeIcon icon={faFire} />
-          Popular Movies
-        </h3>
-        <div className="row gx-3">
-          {PopularMovieList.map((Movie) => (
-            <MovieCard
-              key={Movie.ID}
-              MovieData={Movie}
-              SetMovieModalState={SetMovieModalState}
-            />
-          ))}
-          <LoadingSpinner IsLoading={UpcomingMovieLoadingState} />
+          <h3>
+            <FontAwesomeIcon icon={faFire} />
+            Popular Movies
+          </h3>
+          <div className="row gx-3">
+            {PopularMovieList.map((Movie) => (
+              <MovieCard
+                key={Movie.ID}
+                MovieData={Movie}
+                SetMovieModalState={SetMovieModalState}
+              />
+            ))}
+            <LoadingSpinner IsLoading={UpcomingMovieLoadingState} />
+          </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 };

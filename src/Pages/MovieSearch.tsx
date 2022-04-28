@@ -69,39 +69,40 @@ const MovieSearch = () => {
 
   return (
     <>
-      <TopBar />
-      <div className="container-lg">
-        <h2>
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
-          Search Any Moovee
-        </h2>
-        <SearchBar SearchHandler={HandleSearch} />
-        <MovieModal {...MovieModalState} />
+      <MovieModal {...MovieModalState} />
+      <div id="BlurWrapper">
+        <TopBar />
+        <div className="container-lg">
+          <h2>
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+            Search Any Moovee
+          </h2>
+          <SearchBar SearchHandler={HandleSearch} />
 
-        <div className="row gx-3">
-          {SearchResults.map((Movie) => (
-            <MovieCard
-              key={Movie.ID}
-              MovieData={Movie}
-              SetMovieModalState={SetMovieModalState}
-            />
-          ))}
-          <LoadingSpinner IsLoading={IsLoadingResultsState} />
-          {QueryState.MoreResultsAvailable && (
-            <button
-              className="btn btn-primary"
-              onClick={() =>
-                HandleSearch(QueryState.Query, QueryState.CurrentPage + 1)
-              }>
-              Load More
-            </button>
-          )}
-          {!QueryState.MoreResultsAvailable && QueryState.TotalResults > 0 && (
-            <h4>End of Results</h4>
-          )}
+          <div className="row gx-3">
+            {SearchResults.map((Movie) => (
+              <MovieCard
+                key={Movie.ID}
+                MovieData={Movie}
+                SetMovieModalState={SetMovieModalState}
+              />
+            ))}
+            <LoadingSpinner IsLoading={IsLoadingResultsState} />
+            {QueryState.MoreResultsAvailable && (
+              <button
+                className="btn btn-primary"
+                onClick={() =>
+                  HandleSearch(QueryState.Query, QueryState.CurrentPage + 1)
+                }>
+                Load More
+              </button>
+            )}
+            {!QueryState.MoreResultsAvailable &&
+              QueryState.TotalResults > 0 && <h4>End of Results</h4>}
+          </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 };

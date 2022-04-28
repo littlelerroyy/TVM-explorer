@@ -1,5 +1,8 @@
 import Movie from "../Models/MovieModel";
 import PlaceHolderImage from "../Imgs/MoviePlaceholders/poster_w342.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { ApplyBlurToModalBg } from "./MovieModal";
 
 interface IMovieCard {
   MovieData: Movie;
@@ -29,8 +32,10 @@ const MovieCard = ({ MovieData, SetMovieModalState }: IMovieCard) => {
             data-bs-target="#MovieModal"
             onClick={() => {
               SetMovieModalState(MovieData);
+              ApplyBlurToModalBg();
             }}>
-            Discover
+            <FontAwesomeIcon icon={faCircleInfo} />
+            <span className="text ms-2">Discover</span>
           </button>
         </div>
       </div>
