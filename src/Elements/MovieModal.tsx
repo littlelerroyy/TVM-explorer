@@ -1,6 +1,10 @@
+import { useState } from "react";
 import Movie from "../Models/MovieModel";
+import LoadingSpinner from "./LoadingSpinner";
 
 const MovieModal = (MovieData: Movie) => {
+  const [MovieIsLoaded, SetMovieIsLoaded] = useState(true);
+
   return (
     <>
       <div
@@ -25,9 +29,12 @@ const MovieModal = (MovieData: Movie) => {
                     <h5>
                       {MovieData.Title} ({MovieData.ReleaseDate.getFullYear()})
                     </h5>
+                    <LoadingSpinner IsLoading={MovieIsLoaded} />
+
                     <img
                       className="img-fluid mx-auto"
-                      src={`https://image.tmdb.org/t/p/w780/${MovieData.BackdropPath}`}
+                      onLoad={() => SetMovieIsLoaded(false)}
+                      src={`https://image.tmdb.org/t/p/w780${MovieData.BackdropPath}`}
                     />
                     <p>{MovieData.ReleaseDate.getFullYear()}</p>
                     <p>{MovieData.Overview}</p>

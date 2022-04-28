@@ -6,10 +6,10 @@ const MovieCard = (props: any) => {
     React.SetStateAction<Movie>
   >;
   return (
-    <div className="col">
+    <div className="col-sm-4">
       <div className="card movie-card shadow rounded-3 mx-auto my-3 ">
         <img
-          src={`https://image.tmdb.org/t/p/w342/${MovieData.BackdropPath}`}
+          src={`https://image.tmdb.org/t/p/w342${MovieData.BackdropPath}`}
           className="card-img-top "
           alt="..."
         />
