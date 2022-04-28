@@ -1,7 +1,6 @@
 import { moveEmitHelpers } from "typescript";
 import TopBar from "../Sections/TopBar";
 import MovieCard from "../Elements/MovieCard";
-import SearchBar from "../Elements/SearchBar";
 import Movie from "../Models/MovieModel";
 import { useEffect, useState } from "react";
 import MovieModal from "../Elements/MovieModal";
@@ -52,10 +51,7 @@ const Movies = () => {
       <TopBar />
       <div className="container-lg">
         <h2>Movies</h2>
-        <SearchBar />
-
         <MovieModal {...MovieModalState} />
-
         <h3>Upcoming Movies</h3>
         <div className="row gx-3">
           {UpcomingMovieList.map((Movie) => (

@@ -1,4 +1,5 @@
 import IMovie from "../Interface/IMovie";
+import ISearchQueryState from "../Interface/ISearchQueryState";
 class Movie implements IMovie {
   ID: number;
   Title: string;
@@ -94,15 +95,28 @@ class Movie implements IMovie {
     return MovieArray;
   }
 
-  public static async SearchMovie(queryString: string) {
+  public static async SearchMovie(
+    queryString: string,
+    Page: number,
+    SetQueryState: React.Dispatch<React.SetStateAction<ISearchQueryState>>
+  ) {
+    let EncodedQuery = encodeURI(queryString);
     let response = await fetch(
-      `https://api.themoviedb.org/3/search/movie?query=${queryString}&api_key=${process.env.REACT_APP_API_KEY}`
+      `https://api.themoviedb.org/3/search/movie?query=${EncodedQuery}&page=${Page}&api_key=${process.env.REACT_APP_API_KEY}`
     );
     let Data = await response.json();
     let MovieArray: Movie[] = [];
 
     Data.results.forEach((x: any) => {
       MovieArray.push(this.MakeMovie(x));
+    });
+
+    SetQueryState({
+      Query: queryString,
+      CurrentPage: Page,
+      TotalPages: Data.total_pages,
+      TotalResults: Data.total_results,
+      MoreResultsAvailable: Page != Data.total_pages,
     });
 
     return MovieArray;
