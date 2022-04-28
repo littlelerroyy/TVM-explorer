@@ -5,11 +5,14 @@ import SearchBar from "../Elements/SearchBar";
 import Movie from "../Models/MovieModel";
 import { useEffect, useState } from "react";
 import MovieModal from "../Elements/MovieModal";
+import LoadingSpinner from "../Elements/LoadingSpinner";
 
 const Movies = () => {
   //Set the movie list states
   let [PopularMovieList, SetPopularMovieList] = useState<Movie[]>([]);
+  let [PopMovieLoadingState, SetPopLoadingState] = useState(true);
   let [UpcomingMovieList, SetUpcomingMoveList] = useState<Movie[]>([]);
+  let [UpcomingMovieLoadingState, UpcomingLoadingState] = useState(true);
 
   let PlaceHolderMovie = new Movie(
     0,
@@ -31,13 +34,17 @@ const Movies = () => {
   let [MovieModalState, SetMovieModalState] = useState<Movie>(PlaceHolderMovie);
 
   useEffect(() => {
-    Movie.GetPopular().then((MovieData) =>
-      SetPopularMovieList((prevState) => prevState.concat(MovieData))
-    );
+    //Get Popular Movie Data
+    Movie.GetPopular().then((MovieData) => {
+      SetPopularMovieList((prevState) => prevState.concat(MovieData));
+      SetPopLoadingState(false);
+    });
 
-    Movie.GetUpcoming().then((MovieData) =>
-      SetUpcomingMoveList((prevState) => prevState.concat(MovieData))
-    );
+    //Get Upcoming Movie Data
+    Movie.GetUpcoming().then((MovieData) => {
+      SetUpcomingMoveList((prevState) => prevState.concat(MovieData));
+      UpcomingLoadingState(false);
+    });
   }, []);
 
   return (
@@ -58,6 +65,7 @@ const Movies = () => {
               key={Movie.ID}
             />
           ))}
+          <LoadingSpinner IsLoading={PopMovieLoadingState} />
         </div>
 
         <h3>Popular Movies</h3>
@@ -69,6 +77,7 @@ const Movies = () => {
               SetModalState={SetMovieModalState}
             />
           ))}
+          <LoadingSpinner IsLoading={UpcomingMovieLoadingState} />
         </div>
       </div>
     </>
