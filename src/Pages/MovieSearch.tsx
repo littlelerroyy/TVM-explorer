@@ -83,7 +83,7 @@ const MovieSearch = () => {
             <MovieCard
               key={Movie.ID}
               MovieData={Movie}
-              SetModalState={SetMovieModalState}
+              SetMovieModalState={SetMovieModalState}
             />
           ))}
           <LoadingSpinner IsLoading={IsLoadingResultsState} />

@@ -70,7 +70,7 @@ const Movies = () => {
           {UpcomingMovieList.map((Movie) => (
             <MovieCard
               MovieData={Movie}
-              SetModalState={SetMovieModalState}
+              SetMovieModalState={SetMovieModalState}
               key={Movie.ID}
             />
           ))}
@@ -86,7 +86,7 @@ const Movies = () => {
             <MovieCard
               key={Movie.ID}
               MovieData={Movie}
-              SetModalState={SetMovieModalState}
+              SetMovieModalState={SetMovieModalState}
             />
           ))}
           <LoadingSpinner IsLoading={UpcomingMovieLoadingState} />

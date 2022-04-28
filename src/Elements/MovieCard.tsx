@@ -1,12 +1,12 @@
 import Movie from "../Models/MovieModel";
-import IMovie from "../Interface/IMovie";
 import PlaceHolderImage from "../Imgs/MoviePlaceholders/poster_w342.jpg";
-const MovieCard = (props: any) => {
-  const MovieData = props.MovieData as Movie;
 
-  const SetMovieModalState = props.SetModalState as React.Dispatch<
-    React.SetStateAction<Movie>
-  >;
+interface IMovieCard {
+  MovieData: Movie;
+  SetMovieModalState: React.Dispatch<React.SetStateAction<Movie>>;
+}
+
+const MovieCard = ({ MovieData, SetMovieModalState }: IMovieCard) => {
   return (
     <div className="col-sm-4">
       <div className="card movie-card shadow rounded-3 mx-auto my-3 ">
