@@ -3,13 +3,19 @@ import PlaceHolderImage from "../Imgs/MoviePlaceholders/poster_w342.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { ApplyBlurToModalBg } from "./MovieModal";
+import DetailedMovie from "../Models/DetailedMovieModel";
 
 interface IMovieCard {
   MovieData: Movie;
-  SetMovieModalState: React.Dispatch<React.SetStateAction<Movie>>;
+  SetMovieModalState: React.Dispatch<React.SetStateAction<DetailedMovie>>;
+  SetMovieIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const MovieCard = ({ MovieData, SetMovieModalState }: IMovieCard) => {
+const MovieCard = ({
+  MovieData,
+  SetMovieModalState,
+  SetMovieIsLoading,
+}: IMovieCard) => {
   return (
     <div className="col-sm-4">
       <div className="card movie-card shadow rounded-3 mx-auto my-3 ">
@@ -31,7 +37,12 @@ const MovieCard = ({ MovieData, SetMovieModalState }: IMovieCard) => {
             data-bs-toggle="modal"
             data-bs-target="#MovieModal"
             onClick={() => {
-              SetMovieModalState(MovieData);
+              SetMovieIsLoading(true);
+              DetailedMovie.GetMovie(MovieData.ID).then((Movie) => {
+                SetMovieModalState(Movie);
+                SetMovieIsLoading(false);
+              });
+
               ApplyBlurToModalBg();
             }}>
             <FontAwesomeIcon icon={faCircleInfo} />
@@ -42,4 +53,5 @@ const MovieCard = ({ MovieData, SetMovieModalState }: IMovieCard) => {
     </div>
   );
 };
+
 export default MovieCard;

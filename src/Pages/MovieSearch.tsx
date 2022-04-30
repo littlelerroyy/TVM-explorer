@@ -9,6 +9,7 @@ import TopBar from "../Sections/TopBar";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Footer from "../Sections/Footer";
+import DetailedMovie from "../Models/DetailedMovieModel";
 
 const MovieSearch = () => {
   //Delcare PageNumber
@@ -18,8 +19,6 @@ const MovieSearch = () => {
   //Create States
   const [IsLoadingResultsState, SetIsLoadingResultsState] = useState(false);
   const [SearchResults, SetSearchResults] = useState<Movie[]>([]);
-
-  //QueryState, page number and query;
   const [QueryState, SetQueryState] = useState<ISearchQueryState>({
     Query: "",
     CurrentPage: 0,
@@ -28,7 +27,7 @@ const MovieSearch = () => {
     MoreResultsAvailable: false,
   });
 
-  let PlaceHolderMovie = new Movie(
+  let PlaceHolderMovie = new DetailedMovie(
     0,
     "Loading Movie",
     "Loading Movie",
@@ -42,9 +41,23 @@ const MovieSearch = () => {
     0,
     0,
     false,
-    false
+    false,
+    {},
+    0,
+    "null",
+    0,
+    null as any,
+    null as any,
+    null as any,
+    null as any,
+    null as any,
+    null as any
   );
-  let [MovieModalState, SetMovieModalState] = useState<Movie>(PlaceHolderMovie);
+
+  let [MovieModalState, SetMovieModalState] =
+    useState<DetailedMovie>(PlaceHolderMovie);
+
+  let [MovieModalIsLoadingState, SetMovieIsLoadingState] = useState(false);
 
   ///Should we display the Load More Results Button?
 
@@ -69,7 +82,10 @@ const MovieSearch = () => {
 
   return (
     <>
-      <MovieModal {...MovieModalState} />
+      <MovieModal
+        MovieData={MovieModalState}
+        MovieIsLoading={MovieModalIsLoadingState}
+      />
       <div id="BlurWrapper">
         <TopBar />
         <div className="container-lg">
@@ -85,6 +101,7 @@ const MovieSearch = () => {
                 key={Movie.ID}
                 MovieData={Movie}
                 SetMovieModalState={SetMovieModalState}
+                SetMovieIsLoading={SetMovieIsLoadingState}
               />
             ))}
             <LoadingSpinner IsLoading={IsLoadingResultsState} />

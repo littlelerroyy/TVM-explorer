@@ -11,6 +11,7 @@ import {
   faFire,
 } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../Sections/Footer";
+import DetailedMovie from "../Models/DetailedMovieModel";
 
 const Movies = () => {
   //Set the movie list states
@@ -19,24 +20,11 @@ const Movies = () => {
   let [UpcomingMovieList, SetUpcomingMoveList] = useState<Movie[]>([]);
   let [UpcomingMovieLoadingState, UpcomingLoadingState] = useState(true);
 
-  let PlaceHolderMovie = new Movie(
-    0,
-    "Loading Movie",
-    "Loading Movie",
-    "Loading",
-    "null.jpg",
-    "1970-01-01",
-    [],
-    "Loading",
-    "null.jpg",
-    0,
-    0,
-    0,
-    false,
-    false
+  let [MovieModalState, SetMovieModalState] = useState<DetailedMovie>(
+    DetailedMovie.EmptyMovie()
   );
 
-  let [MovieModalState, SetMovieModalState] = useState<Movie>(PlaceHolderMovie);
+  let [MovieModalIsLoadingState, SetMovieIsLoadingState] = useState(false);
 
   useEffect(() => {
     //Get Popular Movie Data
@@ -54,7 +42,10 @@ const Movies = () => {
 
   return (
     <>
-      <MovieModal {...MovieModalState} />
+      <MovieModal
+        MovieData={MovieModalState}
+        MovieIsLoading={MovieModalIsLoadingState}
+      />
       <div id="BlurWrapper">
         <TopBar />
         <div className="container-lg">
@@ -72,6 +63,7 @@ const Movies = () => {
               <MovieCard
                 MovieData={Movie}
                 SetMovieModalState={SetMovieModalState}
+                SetMovieIsLoading={SetMovieIsLoadingState}
                 key={Movie.ID}
               />
             ))}
@@ -88,6 +80,7 @@ const Movies = () => {
                 key={Movie.ID}
                 MovieData={Movie}
                 SetMovieModalState={SetMovieModalState}
+                SetMovieIsLoading={SetMovieIsLoadingState}
               />
             ))}
             <LoadingSpinner IsLoading={UpcomingMovieLoadingState} />
